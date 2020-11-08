@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Traits\UploadFilesTrait;
 /**
  * Posts Controller
  *
@@ -11,6 +12,9 @@ namespace App\Controller;
  */
 class PostsController extends AppController
 {
+    use UploadFilesTrait;
+
+
     /**
      * Index method
      *
@@ -54,7 +58,7 @@ class PostsController extends AppController
             $post = $this->Posts->patchEntity($post, $this->request->getData());
             
             if($image = $this->request->getData('image')) {
-                $post->image = $this->Posts->savePostImage($image);
+                $post->image = $this->uploadFiles($image, 'posts');
             }
             
             if ($this->Posts->save($post)) {

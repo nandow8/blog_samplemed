@@ -107,12 +107,4 @@ class PostsTable extends Table
 
         return $rules;
     }
-
-    public function savePostImage($image) {
-        $uniqueImage = date('Y-m-d') . date('H-i-s');
-        $targetPath = WWW_ROOT. 'img'. DS . 'posts'. DS . $uniqueImage . $image->getClientFilename();
-        $image->moveTo($targetPath);
-        
-        return 'posts/' . $uniqueImage . $image->getClientFilename();
-    }
 }
