@@ -43,8 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home']) ?>
-    <?php echo $this->Html->css("bootstrap.min.css"); ?>
+    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home', 'bootstrap.min']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -69,14 +68,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         </div>
     </main>
 
-    
-    
-    
-    
-    
-    
-    <!-- <script src="js/jquery3.slim.min"></script>
-    <script src="js/pooper.min"></script>
-    <script src="js/bootstrap.min"></script> -->
+    <?php echo $this->Html->script(['jquery.min', 'bootstrap.min']); ?>
 </body>
 </html>
