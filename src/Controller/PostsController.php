@@ -38,8 +38,9 @@ class PostsController extends AppController
     public function view($slug = null)
     {
         $post = $this->Posts->findBySlug($slug)->firstOrFail();
+        $userId = $_SESSION['Auth']['id'] ?? null;
 
-        $this->set(compact('post'));
+        $this->set(compact('post', 'userId'));
     }
 
     /**

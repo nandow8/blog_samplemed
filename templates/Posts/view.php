@@ -1,58 +1,31 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Post $post
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Post'), ['action' => 'edit', $post->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Post'), ['action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Posts'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Post'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="posts view content">
-            <h3><?= h($post->title) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $post->has('user') ? $this->Html->link($post->user->name, ['controller' => 'Users', 'action' => 'view', $post->user->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Title') ?></th>
-                    <td><?= h($post->title) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Slug') ?></th>
-                    <td><?= h($post->slug) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Image') ?></th>
-                    <td><?= h($post->image) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($post->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($post->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($post->modified) ?></td>
-                </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Body') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($post->body)); ?>
-                </blockquote>
+<div class="column-responsive ">
+    <div class="row">
+        <div class="card col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+            <h3 class="text-center font-weight-bold"><strong><?= $post->title ?></strong></h3>
+            <?php echo $this->Html->image($post->image, ['class' => 'card-img-top img-thumbnail rounded mx-auto d-block', 'alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100']); ?>
+            <div class="card-body">
+                <p class="card-text"><?php echo $post->body ?></p>
             </div>
+        </div>
+    </div>
+
+    <div class="column-responsive">
+        <div class="posts form content">
+            <?php if($userId): ?>
+                <?php echo $this->Form->create(null, ['url' => ['controller' => 'Comments', 'action' => 'add']]); ?>
+            <?php else: ?>
+                <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login']]); ?>
+            <?php endif; ?>
+
+            <?= $this->Form->input('post_id', ['type' => 'hidden', 'value' => $post->id]); ?>
+            <fieldset>
+                <legend><?= __('Add Comment') ?></legend>
+                <?php
+                echo $this->Form->control('body', ['label' => '', 'cols' => 25, 'required' => true]);
+                ?>
+            </fieldset>
+            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
