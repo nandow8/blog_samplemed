@@ -28,4 +28,13 @@
             <?= $this->Form->end() ?>
         </div>
     </div>
+
+    <ul class="list-group">
+        <?php foreach ($comments as $key => $value) : ?>
+            <li class="list-group-item">
+                <?php echo $value->users['name'] . ' escreveu: ' . $value->body; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    
 </div>

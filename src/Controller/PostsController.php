@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Table\CommentsTable;
 use App\Traits\UploadFilesTrait;
 /**
  * Posts Controller
@@ -37,10 +38,13 @@ class PostsController extends AppController
      */
     public function view($slug = null)
     {
-        $post = $this->Posts->findBySlug($slug)->firstOrFail();
         $userId = $_SESSION['Auth']['id'] ?? null;
+        $post = $this->Posts->findBySlug($slug)->firstOrFail();
+        
+        $comments = new CommentsTable();
+        $comments = $comments->commentsByPostId($post->id);
 
-        $this->set(compact('post', 'userId'));
+        $this->set(compact('post', 'userId', 'comments'));
     }
 
     /**

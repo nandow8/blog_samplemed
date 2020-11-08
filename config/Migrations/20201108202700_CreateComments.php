@@ -21,6 +21,15 @@ class CreateComments extends AbstractMigration
             'null' => false,
         ]);
 
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+
         $table->addForeignKey('post_id', 'posts', ['id'],
             ['constraint'=>'post_id']);
 

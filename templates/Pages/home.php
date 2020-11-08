@@ -57,7 +57,9 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             </a>
             <h1>
                 Welcome to CakePHP Blog
+
             </h1>
+            <a href="/posts/add" class="btn btn-primary">ADD Post</a>
         </div>
     </header>
     <main class="main">

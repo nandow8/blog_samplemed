@@ -44,8 +44,25 @@ class CommentsTable extends Table
         return $validator;
     }
 
-    public function commentsByPostId()
+    public function commentsByPostId($id)
     {
-        return $this->find();
+        $query = $this->find()
+            ->select(['id', 'body', 'users.name'])
+            ->where(['post_id' => $id])
+            ->order('comments.')
+            ->join([
+                'posts' => [
+                    'table' => 'posts',
+                    'type' => 'LEFT',
+                    'conditions' => 'posts.id = comments.post_id',
+                ],
+                'users' => [
+                    'table' => 'users',
+                    'type' => 'INNER',
+                    'conditions' => 'users.id = posts.user_id',
+                ]
+            ]);
+
+        return $query;
     }
 }
