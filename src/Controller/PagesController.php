@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Model\Table\PostsTable;
 use Cake\Core\Configure;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
@@ -59,7 +60,10 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage'));
+
+        $posts = new PostsTable();
+        $posts = $posts->allPosts();
+        $this->set(compact('page', 'subpage', 'posts'));
 
         try {
             return $this->render(implode('/', $path));

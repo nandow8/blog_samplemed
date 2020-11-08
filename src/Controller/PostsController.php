@@ -22,10 +22,8 @@ class PostsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users'],
-        ];
-        $posts = $this->paginate($this->Posts);
+        $this->loadComponent('Paginator');
+        $posts = $this->Paginator->paginate($this->Posts->allPosts());
 
         $this->set(compact('posts'));
     }
@@ -37,11 +35,9 @@ class PostsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug = null)
     {
-        $post = $this->Posts->get($id, [
-            'contain' => ['Users'],
-        ]);
+        $post = $this->Posts->findBySlug($slug)->firstOrFail();
 
         $this->set(compact('post'));
     }

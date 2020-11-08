@@ -43,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home', 'bootstrap.min']) ?>
+    <?= $this->Html->css(['cake', 'home', 'bootstrap.min']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -61,9 +61,21 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         </div>
     </header>
     <main class="main">
-        <div class="container">
+        <div class="container-fluid">
             <div class="content">
-                <a href="" class="text-center h2">Go to posts</a>
+                <div class="row">
+                    <?php foreach ($posts as $post): ?>
+                        <div class="card col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mt-2">
+                            <img class="card-img-top img-thumbnail rounded mx-auto d-block" src="<?= $post->image ?>" alt="<?= $post->slug ?>">
+                            <?php echo $this->Html->image($post->image, array('class' => 'card-img-top img-thumbnail rounded mx-auto d-block', 'alt' => 'CakePHP', 'border' => '0', 'data-src' => 'holder.js/100%x100')); ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $post->title ?></h5>
+                                <!-- <p class="card-text"><?php echo $post->body ?></p> -->
+                                <?= $this->Html->link($post->slug, ['controller' => 'Posts', 'action' => 'view', $post->slug]) ?>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                </div>
             </div>
         </div>
     </main>

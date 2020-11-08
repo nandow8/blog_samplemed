@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use App\Model\Entity\Post;
-use Cake\ORM\Query;
+use Cake\Utility\Text;
+use Cake\Event\EventInterface;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -106,5 +106,19 @@ class PostsTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
 
         return $rules;
+    }
+
+    public function allPosts()
+    {
+        return $this->find();
+    }
+
+    public function beforeSave(EventInterface $event, $entity, $options)
+    {
+        if ($entity->isNew() && !$entity->slug) {
+            $sluggedTitle = Text::slug($entity->title);
+            // trim slug to maximum length defined in schema
+            $entity->slug = substr($sluggedTitle, 0, 191);
+        }
     }
 }
