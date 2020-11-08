@@ -63,7 +63,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <main class="main">
         <div class="container">
             <div class="content">
-                
+                <a href="" class="text-center h2">Go to posts</a>
             </div>
         </div>
     </main>
