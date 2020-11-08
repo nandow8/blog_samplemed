@@ -11,11 +11,7 @@
 
     <div class="column-responsive">
         <div class="posts form content">
-            <?php if($userId): ?>
-                <?php echo $this->Form->create(null, ['url' => ['controller' => 'Comments', 'action' => 'add']]); ?>
-            <?php else: ?>
-                <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login']]); ?>
-            <?php endif; ?>
+            <?php echo $this->Form->create(null, ['url' => ['controller' => 'Comments', 'action' => 'add']]); ?>
 
             <?= $this->Form->input('post_id', ['type' => 'hidden', 'value' => $post->id]); ?>
             <fieldset>
@@ -32,7 +28,7 @@
     <ul class="list-group">
         <?php foreach ($comments as $key => $value) : ?>
             <li class="list-group-item">
-                <?php echo $value->users['name'] . ' escreveu: ' . $value->body; ?>
+                <?php echo $value->users['name'] . ' wrote: ' . $value->body; ?>
             </li>
         <?php endforeach; ?>
     </ul>

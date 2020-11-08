@@ -31,7 +31,7 @@ class CreatePosts extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('password', 'text', [
+        $table->addColumn('image', 'string', [
             'default' => null,
             'null' => false,
         ]);

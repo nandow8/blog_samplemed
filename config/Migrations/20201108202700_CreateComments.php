@@ -16,6 +16,9 @@ class CreateComments extends AbstractMigration
     {
         $table = $this->table('comments');
         $table->addColumn('post_id', 'integer');
+
+        $table->addColumn('user_id', 'integer');
+
         $table->addColumn('body', 'text', [
             'default' => null,
             'null' => false,
@@ -32,6 +35,8 @@ class CreateComments extends AbstractMigration
 
         $table->addForeignKey('post_id', 'posts', ['id'],
             ['constraint'=>'post_id']);
+        
+        
 
         $table->create();
     }

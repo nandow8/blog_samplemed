@@ -49,7 +49,7 @@ class CommentsTable extends Table
         $query = $this->find()
             ->select(['id', 'body', 'users.name'])
             ->where(['post_id' => $id])
-            ->order('comments.')
+            ->order('comments.modified')
             ->join([
                 'posts' => [
                     'table' => 'posts',
@@ -59,7 +59,7 @@ class CommentsTable extends Table
                 'users' => [
                     'table' => 'users',
                     'type' => 'INNER',
-                    'conditions' => 'users.id = posts.user_id',
+                    'conditions' => 'users.id = comments.user_id',
                 ]
             ]);
 

@@ -61,11 +61,13 @@ class PostsController extends AppController
             if($image = $this->request->getData('image')) {
                 $post->image = $this->uploadFiles($image, 'posts');
             }
+            if(isset($_SESSION['Auth']['id']))
+                $post->user_id = $_SESSION['Auth']['id'];
             
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('The post has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display']);
             }
             $this->Flash->error(__('The post could not be saved. Please, try again.'));
         }
